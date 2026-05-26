@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>विवाह बायोडाटा - चि. रोहित कैलास जाधव</title>
+    <!-- Google Fonts for rich look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Rozha+One&family=Noto+Serif+Devanagari:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --maroon: #800020;
+            --gold: #FFD700;
+            --deep-orange: #FF4500;
+            --cream: #FFFDD0;
+            --dark-gold: #B8860B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif Devanagari', serif;
+            background-color: #fce4ec;
+            background-image: radial-gradient(#ffcc80 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Welcome / Splash Screen */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--maroon), #4a0012);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: transform 0.8s ease-in-out, opacity 0.5s ease;
+            text-align: center;
+            padding: 20px;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+        }
+
+        .bappa-logo img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0px 0px 20px var(--gold));
+        }
+
+        .welcome-text {
+            font-family: 'Yatra One', cursive;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .welcome-sub {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .enter-btn {
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            color: var(--maroon);
+            border: 2px solid var(--gold);
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif Devanagari', sans-serif;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            background: #fff;
+            color: var(--maroon);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* Main Biodata Container */
+        .main-container {
+            max-width: 700px;
+            margin: 30px auto;
+            background-color: var(--cream);
+            border: 15px solid var(--maroon);
+            border-image: linear-gradient(to bottom right, var(--maroon), var(--deep-orange), var(--dark-gold)) 15;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            /* Hidden initially */
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* Traditional Border Overlay (Floral Vibe) */
+        .main-container::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 2px dashed var(--dark-gold);
+            pointer-events: none;
+        }
+
+        /* Marigold/Toran Top Border Simulation */
+        .toran {
+            text-align: center;
+            color: var(--deep-orange);
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px var(--gold);
+        }
+
+        /* Header / Shloka */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .shloka {
+            font-family: 'Rozha One', serif;
+            color: var(--maroon);
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 5px;
+        }
+
+        .biodata-title {
+            font-family: 'Yatra One', cursive;
+            color: var(--deep-orange);
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 1px var(--maroon);
+        }
+
+        /* Section Styling */
+        .section-title {
+            background: linear-gradient(90deg, var(--maroon), var(--deep-orange));
+            color: white;
+            padding: 8px 15px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            border-radius: 4px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid var(--gold);
+        }
+
+        /* Data Tables / Rows */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .info-table tr {
+            border-bottom: 1px solid rgba(184, 134, 11, 0.2);
+        }
+
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .info-table td {
+            padding: 12px 8px;
+            vertical-align: top;
+            font-size: 1.05rem;
+        }
+
+        .label {
+            font-weight: bold;
+            color: var(--maroon);
+            width: 30%;
+            position: relative;
+        }
+
+        .colon {
+            width: 5%;
+            color: var(--dark-gold);
+            font-weight: bold;
+        }
+
+        .value {
+            color: #222;
+            width: 65%;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        /* Footer Blessing */
+        .footer-blessing {
+            text-align: center;
+            margin-top: 40px;
+            font-family: 'Yatra One', cursive;
+            color: var(--maroon);
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .main-container {
+                margin: 10px;
+                padding: 15px;
+                border: 8px solid var(--maroon);
+            }
+
+            .info-table td {
+                font-size: 0.95rem;
+                padding: 8px 4px;
+            }
+
+            .label {
+                width: 35%;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. STARTING WELCOME SCREEN (GANPATI BAPPA) -->
+    <div id="welcome-screen">
+        <div class="bappa-logo">
+            <!-- गणपती बाप्पाचा फोटो -->
+            <img src="image/Ganpati.jpg" alt="श्री गणेश">
+        </div>
+        <div class="welcome-text">|| श्री गणेशाय नमः ||</div>
+        <div class="welcome-sub">विवाह बायोडाटामध्ये आपले स्वागत आहे</div>
+        <button class="enter-btn" onclick="showBiodata()">बायोडाटा पहा</button>
+    </div>
+
+    <!-- 2. MAIN BIODATA CARD -->
+    <div class="main-container" id="biodata-card">
+        <!-- Decorative Toran -->
+        <div class="toran">🍁 🌸 🍁 🌸 🍁 🌸 🍁 🌸 🍁</div>
+
+        <div class="header">
+            <div class="shloka">|| श्री गणेशाय नमः ||</div>
+            <div class="biodata-title">विवाह बायोडाटा</div>
+        </div>
+
+        <!-- वैयक्तिक माहिती (Personal Info) -->
+        <div class="section-title">👦 वैयक्तिक माहिती</div>
+        <table class="info-table">
+            <tr>
+                <td class="label">संपूर्ण नाव</td>
+                <td class="colon">:</td>
+                <td class="value highlight">चि. रोहित कैलास जाधव</td>
+            </tr>
+            <tr>
+                <td class="label">जन्मतारीख</td>
+                <td class="colon">:</td>
+                <td class="value">११/०४/२००२ (११ एप्रिल २००२)</td>
+            </tr>
+            <tr>
+                <td class="label">जन्मठिकाण</td>
+                <td class="colon">:</td>
+                <td class="value">सिन्नर</td>
+            </tr>
+            <tr>
+                <td class="label">जन्मवेळ</td>
+                <td class="colon">:</td>
+                <td class="value">रात्री ०१.४५ वाजता</td>
+            </tr>
+            <tr>
+                <td class="label">उंची</td>
+                <td class="colon">:</td>
+                <td class="value">--</td>
+            </tr>
+            <tr>
+                <td class="label">रक्तगट</td>
+                <td class="colon">:</td>
+                <td class="value">--</td>
+            </tr>
+            <tr>
+                <td class="label">शिक्षण</td>
+                <td class="colon">:</td>
+                <td class="value">डी. फार्म. (D. Pharm), बी. फार्म. (B. Pharm)</td>
+            </tr>
+            <tr>
+                <td class="label">नोकरी / व्यवसाय</td>
+                <td class="colon">:</td>
+                <td class="value">--</td>
+            </tr>
+            <tr>
+                <td class="label">देवक</td>
+                <td class="colon">:</td>
+                <td class="value">पाणोज कुंभीर</td>
+            </tr>
+        </table>
+
+        <!-- कौटुंबिक माहिती (Family Info) -->
+        <div class="section-title">👪 कौटुंबिक माहिती</div>
+        <table class="info-table">
+            <tr>
+                <td class="label">वडिलांचे नाव</td>
+                <td class="colon">:</td>
+                <td class="value">
+                    श्री. कैलास विश्वनाथ जाधव <br>
+                    <span style="font-size: 0.95rem; color: #555;">(मो. ७५०७८६७०६५)</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">वडिलांची नोकरी</td>
+                <td class="colon">:</td>
+                <td class="value">एमएसईबी (MSEB) सुरक्षा, सामनगाव, नाशिक</td>
+            </tr>
+            <tr>
+                <td class="label">आईचे नाव</td>
+                <td class="colon">:</td>
+                <td class="value">
+                    सौ. आशा कैलास जाधव <br>
+                    <span style="font-size: 0.95rem; color: #555;">(मो. ८६६९३८५२०२)</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">भाऊ</td>
+                <td class="colon">:</td>
+                <td class="value">चि. यश कैलास जाधव</td>
+            </tr>
+            <tr>
+                <td class="label">चुलते (काका)</td>
+                <td class="colon">:</td>
+                <td class="value">
+                    १) श्री. विलास विश्वनाथ जाधव <br>
+                    <small style="color: #666;">(इंडिया नोट प्रेस, नाशिक रोड)</small><br><br>
+                    २) श्री. मंगेश विश्वनाथ जाधव <br>
+                    <small style="color: #666;">(जि. प. शिक्षक, सोनांबे | मो. ७५८८५५४८२२)</small>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">मामा</td>
+                <td class="colon">:</td>
+                <td class="value">
+                    १) श्री. विनोद हरिभाऊ डोकफोडे <br>
+                    <small style="color: #666;">(शेती / कार सर्व्हिस सेंटर)</small><br><br>
+                    २) श्री. जगदीश हरिभाऊ डोकफोडे
+                </td>
+            </tr>
+            <tr>
+                <td class="label">मामांचा पत्ता</td>
+                <td class="colon">:</td>
+                <td class="value">विजयनगर, सिन्नर, जि. नाशिक</td>
+            </tr>
+            <tr>
+                <td class="label">कायमचा पत्ता</td>
+                <td class="colon">:</td>
+                <td class="value">मु. पो. शिंदे, ता. व जि. नाशिक</td>
+            </tr>
+        </table>
+
+        <!-- नातेसंबंध / सगोत्र (Relatives) -->
+        <div class="section-title">🤝 सगोत्र / नातेवाईक</div>
+        <table class="info-table">
+            <tr>
+                <td class="label">पाहुणे / नातेवाईक</td>
+                <td class="colon">:</td>
+                <td class="value" style="line-height: 1.6;">
+                    डोकफोडे, अस्वले, गायखे, ढगे, पाळदे, टोकणे, उबाडे, कासार, टिकले, निकम, गवळी, थेटे, टिळे, संघाड,
+                    कटाळे.
+                </td>
+            </tr>
+        </table>
+
+        <!-- Footer Note -->
+        <div class="footer-blessing">
+            <br>
+            🍁 धन्यवाद 🍁
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactive Screen Transition -->
+    <script>
+        function showBiodata() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const biodataCard = document.getElementById('biodata-card');
+
+            // Slide up and fade out welcome screen
+            welcomeScreen.style.transform = 'translateY(-100%)';
+            welcomeScreen.style.opacity = '0';
+
+            // Show main biodata with smooth fade in
+            biodataCard.style.display = 'block';
+            setTimeout(() => {
+                biodataCard.style.opacity = '1';
+            }, 100);
+
+            // Auto remove welcome screen from DOM after transition completes
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+            }, 800);
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+# 1. Initialize Git in your folder
+git init
+
+# 2. Add all your files (the HTML and the image folder)
+git add .
+
+# 3. Save them in a commit
+git commit -m "Initial commit: Added traditional Marathi biodata"
+
+# 4. Link your local folder to your new GitHub repository
+# (Replace the URL below with YOUR actual GitHub repository URL)
+git remote add origin https://github.com/Abhay2030/wedding-biodata.git
+
+# 5. Push the code to GitHub
+git branch -M main
+git push -u origin main
